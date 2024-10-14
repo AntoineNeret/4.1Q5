@@ -33,7 +33,7 @@ class Modele_Utilisateur
         $requetePreparee = $connexionPDO->prepare('
         select utilisateur.*, categorie_utilisateur.libelle
         from `utilisateur`  inner join categorie_utilisateur on utilisateur.idCategorie_utilisateur = categorie_utilisateur.id
-        where utilisateur.idCategorie_utilisateur = 2 or utilisateur.idCategorie_utilisateur = 1
+        where utilisateur.idCategorie_utilisateur = 2 or utilisateur.idCategorie_utilisateur = 1  or utilisateur.idCategorie_utilisateur = 5
         order by login');
         $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
         $tableauReponse = $requetePreparee->fetchAll(PDO::FETCH_ASSOC);
@@ -79,6 +79,15 @@ class Modele_Utilisateur
     static function Utilisateur_Creer($login, $motDePasse, $codeCategorie)
     {
         $connexionPDO = Singleton_ConnexionPDO::getInstance();
+
+        //On vérifie avant que le login n'existe pas !
+        $requetePreparee = $connexionPDO->prepare('select * from `utilisateur` where login = :paramlogin');
+        $requetePreparee->bindParam('paramlogin', $login);
+        $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
+        $utilisateur = $requetePreparee->fetch(PDO::FETCH_ASSOC);
+        if ($utilisateur != null) {
+            return false;
+        }
 
         $requetePreparee = $connexionPDO->prepare(
             'INSERT INTO `utilisateur` (`idUtilisateur`, `login`, `idCategorie_utilisateur`, `motDePasse`) 
@@ -192,5 +201,24 @@ SET motDePasse = :parammotDePasse ');
         $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
         return $reponse;
     }
+
+//    static function Utilisateur_ModifierRGPD($dateAcceptationRGPD, $IP)
+//
+//    {
+//        $aAccepteRGPD = true;
+//        $connexionPDO = Singleton_ConnexionPDO::getInstance();
+//
+//        $requetePreparee = $connexionPDO->prepare(
+//            'UPDATE `utilisateur`
+//SET `aAccepteRGPD`= :aAccepteRGPD, `dateAcceptationRGPD`= :dateAcceptationRGPD, `IP`= :IP
+//WHERE idUtilisateur = :paramidUtilisateur');
+//        $requetePreparee->bindParam('aAccepteRGPD', $aAccepteRGPD);
+//        $requetePreparee->bindParam('paramidCategorie_utilisateur', $idCodeCategorie);
+//        $requetePreparee->bindParam('paramidUtilisateur', $idUtilisateur);
+//        $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
+//
+//
+//        return $reponse;
+//    }
 
 }

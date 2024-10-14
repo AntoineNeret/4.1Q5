@@ -44,12 +44,12 @@ else
 //error_log("action : " . $action);
 //utiliser en débuggage pour avoir le type de connexion
 //$Vue->addToCorps(new Vue_AfficherMessage("<br>Action $action<br>"));
-
 switch ($typeConnexion) {
     case "visiteur" :
         include "Controleur/Controleur_visiteur.php";
         break;
-    case "utilisateurCafe":
+    case "commercial":
+    case "rédacteur":
     case "administrateurLogiciel":
         switch ($case) {
             case "Gerer_CommandeClient":
@@ -69,7 +69,7 @@ switch ($typeConnexion) {
                 include "Controleur/Controleur_Gerer_monCompte.php";
                 break;
             default:
-                $Vue->setMenu(new Vue_Menu_Administration());
+                $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
                 break;
         }
         break;

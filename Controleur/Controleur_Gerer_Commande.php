@@ -11,7 +11,7 @@ use App\Vue\Vue_Commande_Liste;
 use App\Vue\Vue_Structure_Entete;
 
 $Vue->setEntete(new Vue_Structure_Entete());
-$Vue->setMenu(new Vue_Menu_Administration());
+$Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
 
 $listeEtatCommande = Modele_Commande::EtatCommande_Liste();
 $Vue->addToCorps(new Vue_Commande_Etat($listeEtatCommande));

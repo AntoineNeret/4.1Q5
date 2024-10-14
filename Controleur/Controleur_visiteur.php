@@ -7,6 +7,7 @@ use App\Vue\Vue_Connexion_Formulaire_client;
 use App\Vue\Vue_Mail_Confirme;
 use App\Vue\Vue_Mail_ReinitMdp;
 use App\Vue\Vue_Menu_Administration;
+use App\Vue\Vue_Menu_Commercial;
 use App\Vue\Vue_Structure_BasDePage;
 use App\Vue\Vue_Structure_Entete;
 
@@ -34,7 +35,7 @@ switch ($action) {
             //Si tous les paramètres du formulaire sont bons
 
             $utilisateur = Modele_Utilisateur::Utilisateur_Select_ParLogin($_REQUEST["compte"]);
-
+            $aAccepteRGPD = false;
             if ($utilisateur != null) {
                 //error_log("utilisateur : " . $utilisateur["idUtilisateur"]);
                 if ($utilisateur["desactiver"] == 0) {
@@ -46,12 +47,15 @@ switch ($action) {
                         switch ($utilisateur["idCategorie_utilisateur"]) {
                             case 1:
                                 $_SESSION["typeConnexionBack"] = "administrateurLogiciel"; //Champ inutile, mais bien pour voir ce qu'il se passe avec des étudiants !
-                                $Vue->setMenu(new Vue_Menu_Administration());
+                                $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
                                 break;
                             case 2:
-                                $_SESSION["typeConnexionBack"] = "utilisateurCafe";
-                                $Vue->setMenu(new Vue_Menu_Administration());
-                                break;
+//                                if ($aAccepteRGPD) {
+                                    $_SESSION["typeConnexionBack"] = "rédacteur";
+                                    $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
+                                    break;
+//                                }
+//                                    include "./Controleur/Controleur_AccepterRGPD";
                             case 3:
                                 $_SESSION["typeConnexionBack"] = "entrepriseCliente";
                                 //error_log("idUtilisateur : " . $_SESSION["idUtilisateur"]);
@@ -59,13 +63,23 @@ switch ($action) {
                                 include "./Controleur/Controleur_Gerer_Entreprise.php";
                                 break;
                             case 4:
-                                $_SESSION["typeConnexionBack"] = "salarieEntrepriseCliente";
-                                $_SESSION["idSalarie"] = $utilisateur["idUtilisateur"];
-                                $_SESSION["idEntreprise"] = Modele_Salarie::Salarie_Select_byId($_SESSION["idUtilisateur"])["idEntreprise"];
-                                include "./Controleur/Controleur_Catalogue_client.php";
-                                break;
+                                if ($aAccepteRGPD) {
+                                    $_SESSION["typeConnexionBack"] = "salarieEntrepriseCliente";
+                                    $_SESSION["idSalarie"] = $utilisateur["idUtilisateur"];
+                                    $_SESSION["idEntreprise"] = Modele_Salarie::Salarie_Select_byId($_SESSION["idUtilisateur"])["idEntreprise"];
+                                    include "./Controleur/Controleur_Catalogue_client.php";
+                                    break;
+                                }
+                                case 5:
+//                                if ($aAccepteRGPD) {
+                                    $_SESSION["typeConnexionBack"] = "commercialCafe";
+                                    $_SESSION["idSalarie"] = $utilisateur["idUtilisateur"];
+                                    $_SESSION["idEntreprise"] = Modele_Salarie::Salarie_Select_byId($_SESSION["idUtilisateur"])["idEntreprise"];
+                                    include "./Controleur/Controleur_Catalogue_client.php";
+                                    break;
+//                                }
+//                                    include "./Controleur/Controleur_AccepterRGPD";
                         }
-
                     } else {//mot de passe pas bon
                         $msgError = "Mot de passe erroné";
 
