@@ -35,7 +35,6 @@ else
 //error_log("case : " . $case);
 //utiliser en débuggage pour avoir le type de connexion
 //$Vue->addToCorps(new Vue_AfficherMessage("<br>Case $case<br>"));
-
 //Identification de l'action demandée
 if (isset($_REQUEST["action"]))
     $action = $_REQUEST["action"];

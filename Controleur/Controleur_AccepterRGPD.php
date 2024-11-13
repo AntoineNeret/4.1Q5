@@ -15,12 +15,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 //Ce contrôleur gère le formulaire de connexion pour les visiteurs
 
 $Vue->setEntete(new Vue_Structure_Entete());
+if (isset($_POST["AccepterRGPD"])) {
+    $action = $_POST["AccepterRGPD"];
+}else{
+    $action = "off";
+}
 
 switch ($action) {
-    case "AccepterRGPD":
-        
+    case "on":
+        Modele_Utilisateur::Utilisateur_ModifierRGPD();
         break;
-    case "RefuserRGPD":
+    case "off":
         session_destroy();
         unset($_SESSION);
         $Vue->setEntete(new Vue_Structure_Entete());

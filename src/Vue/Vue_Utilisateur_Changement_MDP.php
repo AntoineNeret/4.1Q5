@@ -24,6 +24,10 @@ class Vue_Utilisateur_Changement_MDP extends Vue_Composant
 
         <input type='hidden' name='case' value='$this->case'>
         <h1>Changement Mot de passe</h1>
+        <div>
+            <h3>Critère de dureté du mot de passe</h3>
+            <p>Votre mot de passe doit comporter au moins une lettre minuscule, une lettre majuscule, un nombre et un caractère spécial</p>
+        </div>
         <tr>
             <td>
                 <label>Veuillez saisir votre ancien mot de passe : </label>

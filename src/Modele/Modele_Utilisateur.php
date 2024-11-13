@@ -2,6 +2,7 @@
 
 namespace App\Modele;
 use App\Utilitaire\Singleton_ConnexionPDO;
+use DateTime;
 use PDO;
 
 class Modele_Utilisateur
@@ -202,23 +203,31 @@ SET motDePasse = :parammotDePasse ');
         return $reponse;
     }
 
-//    static function Utilisateur_ModifierRGPD($dateAcceptationRGPD, $IP)
-//
-//    {
-//        $aAccepteRGPD = true;
-//        $connexionPDO = Singleton_ConnexionPDO::getInstance();
-//
-//        $requetePreparee = $connexionPDO->prepare(
-//            'UPDATE `utilisateur`
-//SET `aAccepteRGPD`= :aAccepteRGPD, `dateAcceptationRGPD`= :dateAcceptationRGPD, `IP`= :IP
-//WHERE idUtilisateur = :paramidUtilisateur');
-//        $requetePreparee->bindParam('aAccepteRGPD', $aAccepteRGPD);
-//        $requetePreparee->bindParam('paramidCategorie_utilisateur', $idCodeCategorie);
-//        $requetePreparee->bindParam('paramidUtilisateur', $idUtilisateur);
-//        $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
-//
-//
-//        return $reponse;
-//    }
+    static function Utilisateur_ModifierRGPD(): void
+    {
+        $aAccepteRGPD = true;
+        $IP = $_SERVER['REMOTE_ADDR'];
+        $dateAcceptationRGPD = new DateTime();
+        $connexionPDO = Singleton_ConnexionPDO::getInstance();
+
+        $requetePreparee = $connexionPDO->prepare(
+            'UPDATE `utilisateur`
+SET `aAccepteRGPD`= :aAccepteRGPD, `dateAcceptationRGPD`= :dateAcceptationRGPD, `IP`= :IP
+WHERE idUtilisateur = :paramidUtilisateur');
+        $requetePreparee->bindParam('aAccepteRGPD', $aAccepteRGPD);
+        $requetePreparee->bindParam('dateAcceptationRGPD', $dateAcceptationRGPD);
+        $requetePreparee->bindParam('IP', $IP);
+        $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
+    }
+
+    static function RecupererRGPD():void
+    {
+        $connexionPDO = Singleton_ConnexionPDO::getInstance();
+
+        $requetePreparee = $connexionPDO->prepare(
+            'SELECT aAccepteRGPD FROM `utilisateur` WHERE login=:login');
+        $requetePreparee->bindParam('login', $login);
+        $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
+    }
 
 }

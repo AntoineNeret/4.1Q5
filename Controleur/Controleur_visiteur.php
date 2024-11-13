@@ -50,12 +50,13 @@ switch ($action) {
                                 $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
                                 break;
                             case 2:
-//                                if ($aAccepteRGPD) {
+                                if ($aAccepteRGPD) {
                                     $_SESSION["typeConnexionBack"] = "rédacteur";
                                     $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
                                     break;
-//                                }
-//                                    include "./Controleur/Controleur_AccepterRGPD";
+                                }
+                                    include __DIR__."/Controleur_AccepterRGPD.php";
+                                    break;
                             case 3:
                                 $_SESSION["typeConnexionBack"] = "entrepriseCliente";
                                 //error_log("idUtilisateur : " . $_SESSION["idUtilisateur"]);
@@ -71,14 +72,14 @@ switch ($action) {
                                     break;
                                 }
                                 case 5:
-//                                if ($aAccepteRGPD) {
+                                if ($aAccepteRGPD) {
                                     $_SESSION["typeConnexionBack"] = "commercialCafe";
                                     $_SESSION["idSalarie"] = $utilisateur["idUtilisateur"];
                                     $_SESSION["idEntreprise"] = Modele_Salarie::Salarie_Select_byId($_SESSION["idUtilisateur"])["idEntreprise"];
                                     include "./Controleur/Controleur_Catalogue_client.php";
                                     break;
-//                                }
-//                                    include "./Controleur/Controleur_AccepterRGPD";
+                                }
+                                    include __DIR__."/Controleur_AccepterRGPD.php";
                         }
                     } else {//mot de passe pas bon
                         $msgError = "Mot de passe erroné";
