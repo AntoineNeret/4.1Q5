@@ -15,6 +15,10 @@ class ComposerStaticInite7bbedd3b3bc8821ba2cdfcb12f11ae8
         array (
             'Spipu\\Html2Pdf\\' => 15,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -25,6 +29,10 @@ class ComposerStaticInite7bbedd3b3bc8821ba2cdfcb12f11ae8
         'Spipu\\Html2Pdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'App\\' => 
         array (

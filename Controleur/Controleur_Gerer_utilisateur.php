@@ -39,7 +39,7 @@ switch ($action) {
     case "réinitialiserMDPUtilisateur":
         //Réinitialiser MDP sur la fiche de l'entreprise
         $Utilisateur = Modele_Utilisateur::Utilisateur_Select_ParId($_REQUEST["idUtilisateur"]);
-        Modele_Utilisateur::Utilisateur_Modifier_motDePasse($_REQUEST["idUtilisateur"], "secret"); //$Utilisateur["idUtilisateur"]
+        Modele_Utilisateur::Utilisateur_Modifier_motDePasse($_REQUEST["idUtilisateur"], ); //$Utilisateur["idUtilisateur"]
 
         $listeUtilisateur = Modele_Utilisateur:: Utilisateur_Select_Cafe();
         $Vue->addToCorps(new Vue_Utilisateur_Liste($listeUtilisateur));

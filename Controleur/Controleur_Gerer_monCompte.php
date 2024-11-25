@@ -10,7 +10,6 @@ use App\Vue\Vue_Structure_Entete;
 use App\Vue\Vue_Utilisateur_Changement_MDP;
 require_once __DIR__.'/../src/Fonctions/fonctions.php';
 
-
 switch ($action) {
     case "changerMDP":
         //Il a cliqué sur changer Mot de passe. Cas pas fini
@@ -26,6 +25,9 @@ switch ($action) {
             if (\App\Fonctions\CalculComplexiteMdp($_REQUEST["NouveauPassword"]) >= 90) {
                 //on vérifie si le mot de passe de la BDD est le même que celui rentré
                 if ($_REQUEST["NouveauPassword"] == $_REQUEST["ConfirmPassword"]) {
+                    if (isset($_SESSION["reinitmdp"]) &&  $_SESSION["reinitmdp"]) {
+                        $_SESSION["reinitmdp"] = false;
+                    }
                     $Vue->setEntete(new Vue_Structure_Entete());
                     $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
                     Modele_Utilisateur::Utilisateur_Modifier_motDePasse($_SESSION["idUtilisateur"], $_REQUEST["NouveauPassword"]);

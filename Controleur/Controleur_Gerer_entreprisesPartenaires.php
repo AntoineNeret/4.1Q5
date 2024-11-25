@@ -8,8 +8,6 @@ use App\Vue\Vue_Entreprise_Liste;
 use App\Vue\Vue_Structure_BasDePage;
 use App\Vue\Vue_Structure_Entete;
 use PHPMailer\PHPMailer\PHPMailer ;
-use function App\Fonctions\GenereMDP;
-
 //Obligatoire pour avoir l’objet phpmailer qui marche
 
 /**
@@ -39,7 +37,7 @@ switch ($action) {
         //Réinitialiser MDP sur la fiche de l'entreprise
         $entreprise = Modele_Entreprise::Entreprise_Select_ParId($_REQUEST["idEntreprise"]);
 
-        $motDePasse = App\Fonctions\GenereMDP(10);
+        $motDePasse = App\Fonctions\motDePassePerdu(10);
         Modele_Entreprise::Entreprise_Modifier_motDePasse($_REQUEST["idEntreprise"], $motDePasse); //$entreprise["numCompte"]
 
         $mail = new PHPMailer();
