@@ -16,10 +16,21 @@ class Vue_Mail_ReinitMdp extends Vue_Composant
                 <h1>Mail à renouveler</h1>
                 
                 <label><b>Compte</b></label>
-                <input type='email' placeholder='mail du compte à renouveler le mdp' name='email' required>
+                <input type='email' placeholder='mail du compte à renouveler le mdp' name='email'>
                 
                 <button type='submit' id='submit' name='action' 
                             value='reinitmdpconfirm'>
+                            Renouveler mdp
+                </button>
+                
+                
+                                <h1 style='margin-top: 25%'>Mail du compte à renouveler avec jeton</h1>
+                
+                <label><b>Compte</b></label>
+                <input type='email' placeholder='mail du compte à renouveler le mdp' name='mailJeton'>
+                
+                <button type='submit' id='submit' name='action' 
+                            value='reinitmdpconfirmtoken'>
                             Renouveler mdp
                 </button>";
         $str .=  "

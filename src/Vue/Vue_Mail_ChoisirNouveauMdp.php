@@ -1,5 +1,8 @@
 <?php
 namespace App\Vue;
+use App\Utilitaire\Vue_Composant;
+
+require_once 'Controleur/Controleur_visiteur.php';
 class Vue_Mail_ChoisirNouveauMdp  extends Vue_Composant
 {
     private string $token;
@@ -10,7 +13,7 @@ class Vue_Mail_ChoisirNouveauMdp  extends Vue_Composant
 
     function donneTexte(): string
     {
-        return "  <form action='index.php' method='post' style='    width: 50%;    display: block;    margin: auto;'>
+        return "  <form method='post' style='    width: 50%;    display: block;    margin: auto;'>
                
                 <h1>Choisissez votre nouveau mdp</h1>
                 <input type='hidden' name='token' value='$this->token'>
@@ -18,7 +21,7 @@ class Vue_Mail_ChoisirNouveauMdp  extends Vue_Composant
                 <input type='password' placeholder='nouveau mdp' name='mdp1' required>
                 <input type='password' placeholder='confirme nouveau mdp' name='mdp2' required>
                 
-                <button type='submit' id='submit' name='action' value='choixmdp'>
+                <button type='submit' id='submit' name='action' value='choixmdptoken'>
                       Confirmer le mdp
                 </button>
             </form>

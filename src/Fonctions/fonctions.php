@@ -68,3 +68,40 @@ return round(strlen($mdp)*log($base,2));
         }
         echo $msg;
     }
+
+/**
+ * @throws \SodiumException
+ */
+function jeton(): string{
+        $octetsAleatoires = openssl_random_pseudo_bytes (256) ;
+
+        return sodium_bin2base64($octetsAleatoires, SODIUM_BASE64_VARIANT_ORIGINAL);
+    }
+
+function envoyerToken($token): void
+{
+
+    //Obligatoire pour avoir l’objet phpmailer qui marche
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->Host = '127.0.0.1';
+    $mail->Port = 1025; //Port non crypté
+    $mail->SMTPAuth = false; //Pas d’authentification
+    $mail->SMTPAutoTLS = false; //Pas de certificat TLS
+    $mail->setFrom('café@café.fr', 'café');
+    $mail->addAddress('client@client.com', 'Mon client');
+    if ($mail->addReplyTo("client@client.pl", 'café')) {
+        $mail->Subject = 'Objet : Réinitialisation de mot de passe !';
+        $mail->isHTML(true);
+        $mail->Body = "Le lien de reinitialisation de mot de passe est le suivant : <a href='localhost:8000/index.php?action=token&token=$token'>localhost:8000/index.php?action=token&token=$token</a>";
+
+        if (!$mail->send()) {
+            $msg = 'Désolé, quelque chose a mal tourné. Veuillez réessayer plus tard.';
+        } else {
+            $msg = 'Message envoyé ! Merci de nous avoir contactés.';
+        }
+    } else {
+        $msg = 'Il doit manquer qqc !';
+    }
+    echo $msg;
+}

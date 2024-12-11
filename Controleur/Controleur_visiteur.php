@@ -17,22 +17,41 @@ use PHPMailer\PHPMailer\PHPMailer;
 $Vue->setEntete(new Vue_Structure_Entete());
 
 switch ($action) {
+    case "reinitmdpconfirmtoken":
+        $modele_jeton = new \App\Modele\Modele_Jeton();
+        $modele_utilisateur = new \App\Modele\Modele_Utilisateur();
+        $token = \App\Fonctions\jeton();
+        $_SESSION["jeton"]=$token;
+        $idUtilisateur = $modele_utilisateur->Utilisateur_Select_ParLogin($_POST["mailJeton"])["idUtilisateur"];
+        $modele_jeton->Jeton_Creer($idUtilisateur,75,$token);
+        \App\Fonctions\envoyerToken($token);
+        $Vue->addToCorps(new Vue_Mail_Confirme());
+        break;
+    case "choixmdptoken":
+        $modele_jeton = new \App\Modele\Modele_Jeton();
+        $jeton = $modele_jeton->Jeton_Fetch($_SESSION["jeton"]);
+        Modele_Utilisateur::Utilisateur_Modifier_motDePasse($jeton[0]["idUtilisateur"],$_POST["mdp1"]);
+        $Vue->addToCorps(new Vue_Connexion_Formulaire_client());
+        break;
     case "reinitmdpconfirm":
-          if (isset($_POST["email"])){
+          if (isset($_POST["email"]) && $_POST["email"] != "") {
               $nouveauMDP = \App\Fonctions\motDePassePerdu(30);
               \App\Fonctions\envoyerMail($nouveauMDP);
               Modele_Utilisateur::Utilisateur_Modifier_motDePasse(Modele_Utilisateur::Utilisateur_Select_ParLogin($_POST["email"])["idUtilisateur"],$nouveauMDP);
+              $_SESSION["reinitmdp"] = true;
           }
-        $_SESSION["reinitmdp"] = true;
-
         $Vue->addToCorps(new Vue_Mail_Confirme());
-
         break;
+
     case "reinitmdp":
-
-
         $Vue->addToCorps(new Vue_Mail_ReinitMdp());
+        break;
 
+    case "token":
+        $modele_jeton = new \App\Modele\Modele_Jeton();
+        $modele_utilisateur = new \App\Modele\Modele_Utilisateur();
+        $jeton = $modele_jeton->Jeton_Fetch($_SESSION["jeton"]);
+        $Vue->addToCorps(new \App\Vue\Vue_Mail_ChoisirNouveauMdp($_SESSION["jeton"]));
         break;
     case "Se connecter" :
         if (isset($_REQUEST["compte"]) and isset($_REQUEST["password"])) {
