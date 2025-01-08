@@ -24,7 +24,7 @@ class Vue_Compte_Administration_Gerer extends Vue_Composant
                 <form style='display: contents'>
                     
                      <input type='hidden' name='case' value='$this->action'>
-                     
+                     ".genereChampHiddenCSRF()."
                     <button type='submit' name='action' value='changerMDP'>Changer mot de passe </button>
                 </form>
             </td>
@@ -32,7 +32,7 @@ class Vue_Compte_Administration_Gerer extends Vue_Composant
         <tr>
             <td>
                 <form style='display: contents'>
-                    
+                    ".genereChampHiddenCSRF()."
                     <input type='hidden' name='case' value='$this->action'>
                     
                     <button type='submit' name='action' value='SeDeconnecter'>

@@ -51,7 +51,7 @@ class Vue_Produit_Tous extends Vue_Composant
 
                 $str .= "
             <form id='form-id-$nproduit' class='form_produit'>
-            
+            ".genereChampHiddenCSRF()."
             <input type='hidden' value='$nproduit' name='idProduit'>
             <input type='hidden' name='action' value='ModifierProduit'>
             <input type='hidden' name='case' value='Gerer_catalogue'>

@@ -33,7 +33,7 @@ class Vue_Entreprise_Gerer_Compte  extends Vue_Composant
         <tr>
             <td>
                 <form style='display: contents'>
-                    
+                    ".genereChampHiddenCSRF()."
                     <input type='hidden' name='case' value='Gerer_Entreprise'>
                          
                 

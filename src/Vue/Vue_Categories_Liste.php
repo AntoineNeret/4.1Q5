@@ -21,7 +21,7 @@ class Vue_Categories_Liste extends Vue_Composant
                 ";
         if ($this->utilisateur) {
             $str .= "<form style='display: contents'> 
-            
+            ".genereChampHiddenCSRF()."
                 <li>
                     <input type='hidden' name='case' value='Gerer_catalogue'>
                     

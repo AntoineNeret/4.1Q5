@@ -16,7 +16,7 @@ class Vue_Connexion_Formulaire_client extends Vue_Composant
 <h1>Café : Connexion</h1>
 <div  style='    width: 50%;    display: block;    margin: auto;'>  
   <form action='index.php' method='post'>
-  
+                ".genereChampHiddenCSRF()."
                 <h1>Connexion</h1>
                 
                 <label><b>Compte</b></label>
@@ -37,7 +37,7 @@ class Vue_Connexion_Formulaire_client extends Vue_Composant
         $str .=  "
 
 </form>
-<form>
+".genereChampHiddenCSRF()."
 
 <h1>Mot de passe perdu ?</h1>
 

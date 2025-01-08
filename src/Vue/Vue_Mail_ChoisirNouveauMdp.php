@@ -14,7 +14,7 @@ class Vue_Mail_ChoisirNouveauMdp  extends Vue_Composant
     function donneTexte(): string
     {
         return "  <form method='post' style='    width: 50%;    display: block;    margin: auto;'>
-               
+               ".genereChampHiddenCSRF()."
                 <h1>Choisissez votre nouveau mdp</h1>
                 <input type='hidden' name='token' value='$this->token'>
                 <label><b>Compte</b></label>

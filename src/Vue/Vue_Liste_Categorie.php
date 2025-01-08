@@ -16,7 +16,7 @@ class Vue_Liste_Categorie  extends Vue_Composant
     <h1>Liste des Catégories de produit</h1> <br>
     <table style='    display: inline-block;'>
         <form>
-            
+            ".genereChampHiddenCSRF()."
             <td colspan='4'>
             <button class='btnRadius'  type='submit' name='action' 
                             value='nouvelleCategorie'>
@@ -41,7 +41,7 @@ class Vue_Liste_Categorie  extends Vue_Composant
                 <td>$iemeCategorie[libelle]</td>
                 <td>
                     <form style='display: contents'>
-                        
+                        ".genereChampHiddenCSRF()."
                         <input type='hidden' name='case' value='Gerer_catalogue'>
                             
                             <input type='hidden' value='$iemeCategorie[idCategorie]' name='idCategorie'>
@@ -57,7 +57,7 @@ class Vue_Liste_Categorie  extends Vue_Composant
                 <form style='display: contents'>
                 
                     <input type='hidden' name='case' value='Gerer_catalogue'>
-                        
+                        ".genereChampHiddenCSRF()."
                             <input type='hidden' value='$iemeCategorie[idCategorie]' name='idCategorie'>
                               
                             <button class='btnRadius'  type='submit' name='action' value='DesactiverCategorie'>
@@ -70,7 +70,7 @@ class Vue_Liste_Categorie  extends Vue_Composant
                         <form style='display: contents'>
                             
                             <input type='hidden' name='case' value='Gerer_catalogue'>
-                            
+                            ".genereChampHiddenCSRF()."
                             <input type='hidden' value='$iemeCategorie[idCategorie]' name='idCategorie'>
                              
                             <button class='btnRadius'  type='submit' name='action' value='ActiverCategorie'>

@@ -17,6 +17,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 $Vue->setEntete(new Vue_Structure_Entete());
 
 switch ($action) {
+    case "Modifier_RGPD":
+        
+        break;
     case "reinitmdpconfirmtoken":
         $modele_jeton = new \App\Modele\Modele_Jeton();
         $modele_utilisateur = new \App\Modele\Modele_Utilisateur();
@@ -53,10 +56,10 @@ switch ($action) {
         $jeton = $modele_jeton->Jeton_Fetch($_SESSION["jeton"]);
         $Vue->addToCorps(new \App\Vue\Vue_Mail_ChoisirNouveauMdp($_SESSION["jeton"]));
         break;
-    case "Se connecter" :
-        if (isset($_REQUEST["compte"]) and isset($_REQUEST["password"])) {
+    case "Se connecter":
+        $modele_utilisateur = new \App\Modele\Modele_Utilisateur();
+        if (isset($_REQUEST["compte"]) && isset($_REQUEST["password"]) && $modele_utilisateur->RecupererRGPD($_REQUEST["compte"]) && $modele_utilisateur->RecupererDesactiver($_REQUEST["compte"])) {
             //Si tous les paramètres du formulaire sont bons
-
             $utilisateur = Modele_Utilisateur::Utilisateur_Select_ParLogin($_REQUEST["compte"]);
             $aAccepteRGPD = false;
             if ($utilisateur != null) {

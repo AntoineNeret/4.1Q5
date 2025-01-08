@@ -79,7 +79,7 @@ class Vue_Produits_Info_Clients extends Vue_Composant
                 <form>
                     <td colspan='2'>
                         <form>
-                        
+                        ".genereChampHiddenCSRF()."
                         <input type='hidden' value='$nproduit' name='idProduit'>
                         <input type='hidden' value='$this->idCategorie' name='idCategorie'>
                         <input type='hidden' value='$this->recherche' name='recherche'>

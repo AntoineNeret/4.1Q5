@@ -8,7 +8,7 @@ class Vue_Utilisateur_Changement_MDP extends Vue_Composant
     private string $action;
     private string $msg;
 
-    function __construct(string $msg="", string $case="Gerer_Entreprise")
+    function __construct(string $msg="", string $case="Modifier_RGPD")
     {
         $this->msg=$msg;
         $this->case=$case;
@@ -19,7 +19,7 @@ class Vue_Utilisateur_Changement_MDP extends Vue_Composant
     {
 
         $str="    <form style='display: contents'>
-        
+        ".genereChampHiddenCSRF()."
 <table style='display: inline-block'> 
 
         <input type='hidden' name='case' value='$this->case'>

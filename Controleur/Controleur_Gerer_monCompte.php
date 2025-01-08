@@ -11,6 +11,10 @@ use App\Vue\Vue_Utilisateur_Changement_MDP;
 require_once __DIR__.'/../src/Fonctions/fonctions.php';
 
 switch ($action) {
+    case "modifierRGPD":
+        $Vue->setEntete(new Vue_Structure_Entete());
+        $Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
+        $Vue->addToCorps(new Vue_Utilisateur_Changement_RGPD("","Modifier_RGPD"));
     case "changerMDP":
         //Il a cliqué sur changer Mot de passe. Cas pas fini
         $Vue->setEntete(new Vue_Structure_Entete());

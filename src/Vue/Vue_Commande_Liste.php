@@ -60,7 +60,7 @@ class Vue_Commande_Liste extends Vue_Composant
                                 
                                 <input type='hidden' name='case' value='Gerer_CommandeClient'>
                                 <input type='hidden' name='idCommande' value='$item[id]'/>
-                                
+                                ".genereChampHiddenCSRF()."
                                 <button type='submit' name='action' value='VoirDetailCommande'>
                                  Voir
                                 </button>

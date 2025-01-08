@@ -220,14 +220,24 @@ WHERE idUtilisateur = :paramidUtilisateur');
         $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
     }
 
-    static function RecupererRGPD():void
+    static function RecupererRGPD(string $login): bool
     {
         $connexionPDO = Singleton_ConnexionPDO::getInstance();
 
         $requetePreparee = $connexionPDO->prepare(
             'SELECT aAccepteRGPD FROM `utilisateur` WHERE login=:login');
         $requetePreparee->bindParam('login', $login);
-        $reponse = $requetePreparee->execute(); //$reponse boolean sur l'état de la requête
+        return $requetePreparee->execute();
+    }
+
+    static function RecupererDesactiver(string $login): bool
+    {
+        $connexionPDO = Singleton_ConnexionPDO::getInstance();
+
+        $requetePreparee = $connexionPDO->prepare(
+            'SELECT desactiver FROM `utilisateur` WHERE login=:login');
+        $requetePreparee->bindParam('login', $login);
+        return $requetePreparee->execute();
     }
 
 }

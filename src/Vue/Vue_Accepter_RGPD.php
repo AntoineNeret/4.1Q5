@@ -44,7 +44,7 @@ Données nécessaires à la réalisation des actions de fidélisation et à la p
 Données relatives aux moyens de paiement : ces données ne sont pas conservées par la société ABCD ; elles sont collectées lors de la transaction et sont immédiatement supprimées dès le règlement de l’achat.
 Données concernant les listes d'opposition à recevoir de la prospection : trois (3) ans.
 Vos droits
-Si vous ne souhaitez plus recevoir de publicité de la part de la société ABCD (exercice du droit d’opposition ou retrait d’un consentement déjà donné), contactez-nous (prévoir ici un lien vers un formulaire d’exercice des droits informatique et libertés, faisant apparaître les différents hypothèses détaillées ci-dessus).
+Si vous ne souhaitez plus recevoir de publicité de la part de la société ABCD (exercice du droit d’opposition ou retrait d’un consentement déjà donné), <a href>contactez-nous</a> (prévoir ici un lien vers un formulaire d’exercice des droits informatique et libertés, faisant apparaître les différents hypothèses détaillées ci-dessus).
 
 Si, après avoir consenti à ce que vos données soient transmises à nos partenaires commerciaux, vous souhaitez revenir sur ce choix et ne plus recevoir publicité de leur part, contactez-nous (prévoir ici un lien vers le formulaire d’exercice des droits informatique et libertés).
 
@@ -79,7 +79,7 @@ Si vous estimez, après avoir contacté la société ABCD, que vos droits « Inf
         Refuser le RGPD
     </label>
     <input type='radio' name='RefuserRGPD' id='RGPDRefuse'>
-
+    ".genereChampHiddenCSRF()."
 <button type='submit' >Envoyer</button>
 
 </form>

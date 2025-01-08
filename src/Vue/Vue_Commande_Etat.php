@@ -20,7 +20,7 @@ class Vue_Commande_Etat extends Vue_Composant
 
         $str .=  "
                 <form style='display: contents'> 
-                    
+                    ".genereChampHiddenCSRF()."
                     <input type='hidden' name='case' value='Gerer_Commande'>
                     
                     <li><button type='submit' name='action' value='Toute'>Toutes</button> </li>
